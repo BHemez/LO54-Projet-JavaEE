@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="school">
+    <class>fr.utbm.lo54.projet.entity.Client</class>
+    <class>fr.utbm.lo54.projet.entity.Course</class>
+    <class>fr.utbm.lo54.projet.entity.Session</class>
+    <class>fr.utbm.lo54.projet.entity.Location</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/SCHOOL"/>
+      <property name="javax.persistence.jdbc.user" value="SCHOOL"/>
+      <property name="javax.persistence.jdbc.password" value="school"/>
+      <property name="hibernate.hbm2dll.auto" value="validate"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
