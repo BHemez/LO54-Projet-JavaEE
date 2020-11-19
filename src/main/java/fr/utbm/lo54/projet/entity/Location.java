@@ -26,7 +26,7 @@ public class Location implements Serializable{
     @Column(name="CITY")
     private String city;
 
-    @OneToMany(targetEntity=Session.class, mappedBy="location")
+    @OneToMany(targetEntity=Session.class, mappedBy="location", cascade = CascadeType.PERSIST)
     private List<Session> sessions  = new ArrayList();;
     
     public Integer getId() {
@@ -53,5 +53,13 @@ public class Location implements Serializable{
         this.sessions = sessions;
     }
 
+    public void addSession(Session session){
+        sessions.add(session);
+        session.setLocation(this);
+    }
     
+    public void removeSession(Session session){
+        sessions.remove(session);
+        session.setLocation(this);
+    }
 }

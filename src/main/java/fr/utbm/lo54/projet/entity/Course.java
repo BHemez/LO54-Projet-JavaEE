@@ -27,7 +27,7 @@ public class Course implements Serializable{
     @Column(name="TITLE")
     private String title;
 
-    @OneToMany(targetEntity=Session.class, mappedBy="course")
+    @OneToMany(targetEntity=Session.class, mappedBy="course", cascade = CascadeType.PERSIST)
     private List<Session> sessions = new ArrayList();
     
     public Integer getCode() {
@@ -54,5 +54,13 @@ public class Course implements Serializable{
         this.sessions = sessions;
     }
     
+    public void addSession(Session session){
+        sessions.add(session);
+        session.setCourse(this);
+    }
     
+    public void removeSession(Session session){
+        sessions.remove(session);
+        session.setCourse(this);
+    }
 }

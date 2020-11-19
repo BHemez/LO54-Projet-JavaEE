@@ -3,7 +3,6 @@ fr\utbm\lo54\projet\service\SessionService.class
 fr\utbm\lo54\projet\repository\EntitySessionDao.class
 App.class
 fr\utbm\lo54\projet\entity\Course.class
-Test.class
 fr\utbm\lo54\projet\entity\Location.class
 fr\utbm\lo54\projet\entity\Session.class
 fr\utbm\lo54\projet\service\ClientService.class

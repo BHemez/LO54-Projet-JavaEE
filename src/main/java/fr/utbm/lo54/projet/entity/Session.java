@@ -6,10 +6,13 @@
 package fr.utbm.lo54.projet.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -26,24 +29,24 @@ public class Session implements Serializable{
     
     @Temporal(TemporalType.DATE)
     @Column(name="START_DATE")
-    private Date startDate;
+    private Calendar startDate;
     
     @Temporal(TemporalType.DATE)
     @Column(name="END_DATE")
-    private Date endDate;
+    private Calendar endDate;
     
     @Column(name="CAP_MAX")
     private Integer capMax;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "CLIENT_SESSION", joinColumns = @JoinColumn(name = "SESSION_ID"), inverseJoinColumns = @JoinColumn(name = "CLIENT_ID"))
     private List<Client> clients = new ArrayList<>();
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name="COURSE_CODE")
     private Course course;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name="LOCATION_ID")
     private Location location;
 
@@ -55,19 +58,19 @@ public class Session implements Serializable{
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Calendar getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
 
@@ -101,6 +104,40 @@ public class Session implements Serializable{
 
     public void setClients(List<Course> courses) {
         this.clients = clients;
+    }
+
+    public void addClient(Client client) {
+        clients.add(client);
+        client.getSessions().add(this);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.course);
+        hash = 59 * hash + Objects.hashCode(this.location);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Session other = (Session) obj;
+        if (!Objects.equals(this.course, other.course)) {
+            return false;
+        }
+        if (!Objects.equals(this.location, other.location)) {
+            return false;
+        }
+        return true;
     }
     
     

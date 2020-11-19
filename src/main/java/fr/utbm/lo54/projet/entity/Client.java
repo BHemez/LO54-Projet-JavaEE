@@ -38,7 +38,7 @@ public class Client implements Serializable{
     @Column(name="EMAIL")
     private String email;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "CLIENT_SESSION",joinColumns = @JoinColumn(name = "CLIENT_ID"),inverseJoinColumns = @JoinColumn(name = "SESSION_ID"))
     private List<Session> sessions = new ArrayList<>();
 
@@ -98,6 +98,9 @@ public class Client implements Serializable{
         this.sessions = sessions;
     }
     
-    
+    public void addSession(Session session) {
+        sessions.add(session);
+        session.getClients().add(this);
+    }
     
 }
