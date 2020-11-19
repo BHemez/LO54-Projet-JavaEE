@@ -7,6 +7,8 @@ package fr.utbm.lo54.projet.service;
 
 import fr.utbm.lo54.projet.repository.EntityCourseDao;
 import fr.utbm.lo54.projet.entity.Course;
+import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -17,5 +19,20 @@ public class CourseService {
     public void registerCourse(Course c) {
         EntityCourseDao ecd = new EntityCourseDao();
         ecd.save(c);
+    }
+    
+    public List<Course> listCourse(){
+        EntityCourseDao ecd = new EntityCourseDao();
+        return ecd.findAll();
+    }
+    
+    public Optional<Course> findClientById(Integer id) {
+        EntityCourseDao ecd = new EntityCourseDao();
+        return ecd.findById(id);
+    }
+
+    public void deleteCourse(Course course) {
+        EntityCourseDao ecd = new EntityCourseDao();
+        ecd.deleteById(course.getCode());
     }
 }

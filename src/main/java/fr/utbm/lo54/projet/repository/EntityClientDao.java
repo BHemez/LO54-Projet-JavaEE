@@ -42,22 +42,16 @@ public class EntityClientDao {
     }
 
     public void deleteById(Integer id) {
-        // Retrieve the movie with this ID
         Client client = entityManager.find(Client.class, id);
         if (client != null) {
             try {
-                // Start a transaction because we're going to change the database
                 entityManager.getTransaction().begin();
 
-                // Remove all references to this movie by superheroes
                 client.getSessions().forEach(session -> {
                     session.getClients().remove(client);
                 });
 
-                // Now remove the movie
                 entityManager.remove(client);
-
-                // Commit the transaction
                 entityManager.getTransaction().commit();
             } catch (Exception e) {
                 e.printStackTrace();

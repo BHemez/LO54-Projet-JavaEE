@@ -11,6 +11,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import fr.utbm.lo54.projet.entity.Course;
+import fr.utbm.lo54.projet.entity.Session;
+import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -20,10 +23,37 @@ public class EntityCourseDao {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("school");
     EntityManager entityManager = null;
     
-    public void save(Course c) {
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(c);
-        entityManager.getTransaction().commit();
+    public Optional<Course> save(Course c) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(c);
+            entityManager.getTransaction().commit();
+            return Optional.of(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Course> findById(Integer id) {
+        Course c = entityManager.find(Course.class, id);
+        return c != null ? Optional.of(c) : Optional.empty();
+    }
+
+    public List<Course> findAll() {
+        return entityManager.createQuery("from Course").getResultList();
+    }
+
+    public void deleteById(Integer id) {
+        Course c = entityManager.find(Course.class, id);
+        if (c != null) {
+            try {
+                entityManager.getTransaction().begin();
+                entityManager.remove(c);
+                entityManager.getTransaction().commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
