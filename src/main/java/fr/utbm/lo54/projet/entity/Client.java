@@ -9,14 +9,20 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author Remi
  */
+@ManagedBean(name="clientBean")
+@RequestScoped
 @Entity
 @Table(name="CLIENT")
 public class Client implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

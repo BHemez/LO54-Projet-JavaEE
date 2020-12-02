@@ -8,15 +8,21 @@ package fr.utbm.lo54.projet.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 
 /**
  *
  * @author Remi
  */
+@ManagedBean(name="locationBean")
+@RequestScoped
 @Entity
 @Table(name="LOCATION")
 public class Location implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

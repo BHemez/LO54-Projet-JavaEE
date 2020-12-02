@@ -8,6 +8,8 @@ package fr.utbm.lo54.projet.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 
 
@@ -15,9 +17,13 @@ import javax.persistence.*;
  *
  * @author Remi
  */
+@ManagedBean(name="courseBean")
+@RequestScoped
 @Entity
 @Table(name="COURSE")
 public class Course implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

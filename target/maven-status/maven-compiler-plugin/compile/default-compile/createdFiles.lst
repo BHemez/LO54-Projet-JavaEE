@@ -1,5 +1,4 @@
 fr\utbm\lo54\projet\service\LocationService.class
-fr\utbm\lo54\projet\servlet\HomeServlet.class
 fr\utbm\lo54\projet\service\SessionService.class
 fr\utbm\lo54\projet\repository\EntitySessionDao.class
 App.class
@@ -12,7 +11,6 @@ fr\utbm\lo54\projet\repository\EntityClientDao.class
 fr\utbm\lo54\projet\repository\EntityLocationDao.class
 fr\utbm\lo54\projet\entity\Session_.class
 fr\utbm\lo54\projet\repository\EntityCourseDao.class
-fr\utbm\lo54\projet\servlet\CourseServlet.class
 fr\utbm\lo54\projet\entity\Client.class
 fr\utbm\lo54\projet\entity\Client_.class
 fr\utbm\lo54\projet\service\CourseService.class
