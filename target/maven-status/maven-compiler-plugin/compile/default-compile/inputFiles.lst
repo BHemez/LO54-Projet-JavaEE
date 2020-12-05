@@ -1,4 +1,5 @@
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\service\LocationService.java
+D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\entity\Login.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\repository\EntitySessionDao.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\entity\Client.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\entity\Session.java
@@ -10,5 +11,6 @@ D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\repository\EntityClientDao.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\App.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\service\SessionService.java
+D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\tools\SessionUtil.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\entity\Location.java
 D:\UTBM\LO54\Data\Projects\LO54-Projet-JavaEE\src\main\java\fr\utbm\lo54\projet\service\ClientService.java

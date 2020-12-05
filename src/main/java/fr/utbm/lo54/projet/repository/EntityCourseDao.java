@@ -23,37 +23,33 @@ public class EntityCourseDao {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("school");
     EntityManager entityManager = null;
     
-    public Optional<Course> save(Course c) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(c);
-            entityManager.getTransaction().commit();
-            return Optional.of(c);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+    public void save(Course c) {
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(c);
+        entityManager.getTransaction().commit();
     }
-
-    public Optional<Course> findById(Integer id) {
-        Course c = entityManager.find(Course.class, id);
-        return c != null ? Optional.of(c) : Optional.empty();
+    
+    public Course findById(Integer id) {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.find(Course.class, id);
     }
-
+    
+    public Course findByTitle(String title) {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.find(Course.class, title);
+    }
+    
     public List<Course> findAll() {
+        entityManager = entityManagerFactory.createEntityManager();
         return entityManager.createQuery("from Course").getResultList();
     }
-
+    
     public void deleteById(Integer id) {
+        entityManager = entityManagerFactory.createEntityManager();
         Course c = entityManager.find(Course.class, id);
-        if (c != null) {
-            try {
-                entityManager.getTransaction().begin();
-                entityManager.remove(c);
-                entityManager.getTransaction().commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        entityManager.getTransaction().begin();
+        entityManager.remove(c);
+        entityManager.getTransaction().commit();
     }
 }

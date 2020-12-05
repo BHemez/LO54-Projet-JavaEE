@@ -27,7 +27,7 @@ public class SessionService {
         return esd.findAll();
     }
     
-    public Optional<Session> findSessiontById(Integer id) {
+    public Session findSessiontById(Integer id) {
         EntitySessionDao esd = new EntitySessionDao();
         return esd.findById(id);
     }
@@ -35,5 +35,10 @@ public class SessionService {
     public void deleteSession(Session s) {
         EntitySessionDao esd = new EntitySessionDao();
         esd.deleteById(s.getId());
+    }
+    
+    public void updateSession(Session s) {
+        EntitySessionDao esd = new EntitySessionDao();
+        esd.update(s);
     }
 }

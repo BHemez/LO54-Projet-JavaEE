@@ -16,8 +16,6 @@ import javax.persistence.*;
  *
  * @author Remi
  */
-@ManagedBean(name="locationBean")
-@RequestScoped
 @Entity
 @Table(name="LOCATION")
 public class Location implements Serializable{
@@ -32,7 +30,7 @@ public class Location implements Serializable{
     @Column(name="CITY")
     private String city;
 
-    @OneToMany(targetEntity=Session.class, mappedBy="location", cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity=Session.class, mappedBy="location")
     private List<Session> sessions  = new ArrayList();;
     
     public Integer getId() {

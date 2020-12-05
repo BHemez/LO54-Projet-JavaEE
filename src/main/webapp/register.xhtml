@@ -7,11 +7,52 @@
       xmlns:p="http://primefaces.org/ui">
     
     <h:head>
-        <title>Register</title>
+        <title>Registration</title>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
     </h:head>
     <h:body>
+        
         <h:form>
+    <p:panel id="panel" header="Authentication">
+        <center>
+        <p:messages id="msgs" />
+ 
+        <h:panelGrid columns="3" cellpadding="5">
+            <p:outputLabel for="email" value="Email" />
+            <p:inputText id="email" value="#{client.email}" required="true" label="Email">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="email" display="icon" />
+ 
+            <p:outputLabel for="password" value="Password" />
+            <p:inputText id="password" value="#{client.password}" label="Password" required="true">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="password" display="icon" />
             
+            <p:outputLabel for="firstname" value="Firstname" />
+            <p:inputText id="firstname" value="#{client.firstname}" required="true" label="Firstname">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="firstname" display="icon" />
+            
+             <p:outputLabel for="lastname" value="Lastname" />
+            <p:inputText id="lastname" value="#{client.lastname}" required="true" label="Lastname">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="lastname" display="icon" />
+            
+             <p:outputLabel for="address" value="Address" />
+            <p:inputText id="address" value="#{client.address}" required="true" label="Address">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="address" display="icon" />
+ 
+        </h:panelGrid>
+ 
+        <p:commandButton value="Register" update="panel" action="#{client.registerControl}" icon="pi pi-check" />
+            </center>
+    </p:panel>
         </h:form>
     </h:body>
 </html>

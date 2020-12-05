@@ -26,11 +26,16 @@ public class CourseService {
         return ecd.findAll();
     }
     
-    public Optional<Course> findClientById(Integer id) {
+    public Course findCourseById(Integer id) {
         EntityCourseDao ecd = new EntityCourseDao();
         return ecd.findById(id);
     }
 
+    public Course findCourseByTitle(String title) {
+        EntityCourseDao ecd = new EntityCourseDao();
+        return ecd.findByTitle(title);
+    }
+    
     public void deleteCourse(Course course) {
         EntityCourseDao ecd = new EntityCourseDao();
         ecd.deleteById(course.getCode());

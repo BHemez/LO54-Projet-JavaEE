@@ -8,7 +8,7 @@
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/SCHOOL"/>
-      <property name="javax.persistence.jdbc.user" value="SCHOOL"/>
+      <property name="javax.persistence.jdbc.user" value="school"/>
       <property name="javax.persistence.jdbc.password" value="school"/>
       <property name="hibernate.hbm2dll.auto" value="validate"/>
       <property name="hibernate.show_sql" value="true"/>

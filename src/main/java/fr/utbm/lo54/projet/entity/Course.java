@@ -17,8 +17,8 @@ import javax.persistence.*;
  *
  * @author Remi
  */
-@ManagedBean(name="courseBean")
-@RequestScoped
+//@ManagedBean(name="courseBean")
+//@RequestScoped
 @Entity
 @Table(name="COURSE")
 public class Course implements Serializable{
@@ -33,7 +33,7 @@ public class Course implements Serializable{
     @Column(name="TITLE")
     private String title;
 
-    @OneToMany(targetEntity=Session.class, mappedBy="course", cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity=Session.class, mappedBy="course")
     private List<Session> sessions = new ArrayList();
     
     public Integer getCode() {

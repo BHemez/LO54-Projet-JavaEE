@@ -8,7 +8,6 @@ package fr.utbm.lo54.projet.service;
 import fr.utbm.lo54.projet.entity.Client;
 import fr.utbm.lo54.projet.repository.EntityClientDao;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
@@ -26,7 +25,7 @@ public class ClientService {
         return ecd.findAll();
     }
     
-    public Optional<Client> findClientById(Integer id) {
+    public Client findClientById(Integer id) {
         EntityClientDao ecd = new EntityClientDao();
         return ecd.findById(id);
     }
@@ -34,5 +33,15 @@ public class ClientService {
     public void deleteClient(Client client) {
         EntityClientDao ecd = new EntityClientDao();
         ecd.deleteById(client.getId());
+    }
+    
+    public void updateClient(Client client) {
+        EntityClientDao ecd = new EntityClientDao();
+        ecd.update(client);
+    }
+    
+    public boolean loginClient(String email, String password){
+        EntityClientDao ecd = new EntityClientDao();
+        return ecd.login(email, password);
     }
 }

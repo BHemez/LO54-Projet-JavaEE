@@ -22,42 +22,38 @@ public class EntitySessionDao {
     EntityManager entityManager = null;
     
     
-    public Optional<Session> save(Session s) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(s);
-            entityManager.getTransaction().commit();
-            return Optional.of(s);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+    public void save(Session s) {
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(s);
+        entityManager.getTransaction().commit();
     }
-
-    public Optional<Session> findById(Integer id) {
-        Session s = entityManager.find(Session.class, id);
-        return s != null ? Optional.of(s) : Optional.empty();
+    
+    public Session findById(Integer id) {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.find(Session.class, id);
     }
-
+    
     public List<Session> findAll() {
+        entityManager = entityManagerFactory.createEntityManager();
         return entityManager.createQuery("from Session").getResultList();
     }
-
+    
     public void deleteById(Integer id) {
+        entityManager = entityManagerFactory.createEntityManager();
         Session s = entityManager.find(Session.class, id);
-        if (s != null) {
-            try {
-                entityManager.getTransaction().begin();
-
-                s.getClients().forEach(client -> {
-                    client.getSessions().remove(s);
-                });
-
-                entityManager.remove(s);
-                entityManager.getTransaction().commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        entityManager.getTransaction().begin();
+        s.getClients().forEach(client -> {
+            client.getSessions().remove(s);
+        });
+        entityManager.remove(s);
+        entityManager.getTransaction().commit();
+    }
+    
+    public void update(Session s) {
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(s);
+        entityManager.getTransaction().commit();
     }
 }

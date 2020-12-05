@@ -20,8 +20,6 @@ import javax.faces.bean.RequestScoped;
  *
  * @author Remi
  */
-@ManagedBean(name="sessionBean")
-@RequestScoped
 @Entity
 @Table(name="COURSE_SESSION")
 public class Session implements Serializable{
@@ -48,11 +46,11 @@ public class Session implements Serializable{
     @JoinTable(name = "CLIENT_SESSION", joinColumns = @JoinColumn(name = "SESSION_ID"), inverseJoinColumns = @JoinColumn(name = "CLIENT_ID"))
     private List<Client> clients = new ArrayList<>();
     
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="COURSE_CODE")
     private Course course;
     
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="LOCATION_ID")
     private Location location;
 

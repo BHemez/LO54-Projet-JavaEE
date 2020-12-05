@@ -8,10 +8,8 @@ import fr.utbm.lo54.projet.service.ClientService;
 import fr.utbm.lo54.projet.service.CourseService;
 import fr.utbm.lo54.projet.service.LocationService;
 import fr.utbm.lo54.projet.service.SessionService;
-import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import javax.persistence.EntityManager;
-import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -31,40 +29,45 @@ public class App {
         
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("school");
         EntityManager entityManager = null;
+               
+        LocationService ls = new LocationService();
+        CourseService cs = new CourseService();
+        ClientService cls = new ClientService();
+        SessionService ss = new SessionService();
         
-        Session s = new Session();
-        s.setStartDate(new GregorianCalendar(2020,11,21));
-        s.setEndDate(new GregorianCalendar(2020, 11, 28));
-        s.setCapMax(20);
         
-        Course c = new Course();
-        c.setTitle("Management");
-        c.addSession(s);
+        /*Course c = new Course();
+        c.setTitle("Oracle Database");
+        cs.registerCourse(c);
 
         Location l = new Location();
-        l.setCity("Paris");
-        l.addSession(s);
+        l.setCity("Mulhouse");
+        ls.registerLocation(l);
+        
         
         Client cl = new Client();
-        cl.setFirstname("Antoine");
-        cl.setLastname("Test");
-        cl.setAddress("15 rue Charle de Gaules");
-        cl.setPhone("0623232323");
-        cl.setEmail("antoine.test@utbm.fr");
-        cl.addSession(s);
-        
-        
-        ClientService cls = new ClientService();
-        //cls.registerClient(cl);
-        
-        CourseService cs = new CourseService();
-        //cs.registerCourse(c);
-        
-        LocationService ls = new LocationService();
-        //ls.registerLocation(l);
-        
-        SessionService ss = new SessionService();
+        cl.setFirstname("Remi");
+        cl.setLastname("Papillier");
+        cl.setAddress("9 rue Georges Koecklin Belfort");
+        cl.setEmail("remi.papillier@utbm.fr");
+        cl.setPassword("12345678");
+        cls.registerClient(cl);*/
+
+        Session s = new Session();
+        s.setStartDate(new GregorianCalendar(2021,01,18));
+        s.setEndDate(new GregorianCalendar(2021,01,22));
+        s.setCapMax(20);
+        Location testloc = ls.findLocationById(3);
+        s.setLocation(testloc);
+        Course testcourse = cs.findCourseById(5);
+        s.setCourse(testcourse);
         //ss.registerSession(s);
+        /*
+        Client testclient = cls.findClientById(1);
+        testclient.addSession(s);
+        cls.updateClient(testclient);*/
+        
+        System.out.println(cls.loginClient("remi.papier@utbm.fr","123478"));
 
         HibernateUtil.shutdown();
     }

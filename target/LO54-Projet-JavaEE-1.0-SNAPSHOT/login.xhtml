@@ -5,13 +5,40 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
+          
     <h:head>
-        <title>Login</title>
+        <title>Authentication</title>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
     </h:head>
     <h:body>
         <h:form>
-            
+    <p:panel id="panel" header="Authentication">
+        <center>
+        <p:messages id="msgs" />
+ 
+        <h:panelGrid columns="3" cellpadding="5">
+            <p:outputLabel for="email" value="Email" />
+            <p:inputText id="email" value="#{client.email}" required="true" label="Email">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="email" display="icon" />
+ 
+            <p:outputLabel for="password" value="Password" />
+            <p:inputText id="password" value="#{client.password}" label="Password" required="true">
+                <f:validateLength minimum="2" />
+                <p:ajax update="msgPassword" event="keyup" />
+            </p:inputText>
+            <p:message for="password" id="msgPassword" display="icon" />
+ 
+        </h:panelGrid>
+ 
+        <p:commandButton value="Login" update="panel" action="#{client.loginControl}" icon="pi pi-check" />
+
+                    <p class="text-center"><small>Do not have an account?</small></p>
+        <a href="register.xhtml"> Create an account</a>
+            </center>
+    </p:panel>
+
         </h:form>
     </h:body>
 </html>

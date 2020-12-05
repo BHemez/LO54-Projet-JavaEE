@@ -6,6 +6,7 @@
 package fr.utbm.lo54.projet.repository;
 
 import fr.utbm.lo54.projet.entity.Location;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,6 +23,29 @@ public class EntityLocationDao {
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(l);
+        entityManager.getTransaction().commit();
+    }
+    
+    public Location findById(Integer id) {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.find(Location.class, id);
+    }
+    
+    public Location findByCity(String city) {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.find(Location.class, city);
+    }
+    
+    public List<Location> findAll() {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.createQuery("from Session").getResultList();
+    }
+    
+    public void deleteById(Integer id) {
+        entityManager = entityManagerFactory.createEntityManager();
+        Location l = entityManager.find(Location.class, id);
+        entityManager.getTransaction().begin();
+        entityManager.remove(l);
         entityManager.getTransaction().commit();
     }
 }

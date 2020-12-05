@@ -5,19 +5,23 @@
  */
 package fr.utbm.lo54.projet.entity;
 
+import fr.utbm.lo54.projet.service.ClientService;
+import fr.utbm.lo54.projet.tools.SessionUtil;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Remi
  */
-@ManagedBean(name="clientBean")
-@RequestScoped
+@ManagedBean(name="client")
+@SessionScoped
 @Entity
 @Table(name="CLIENT")
 public class Client implements Serializable{
@@ -38,15 +42,38 @@ public class Client implements Serializable{
     @Column(name="ADDRESS")
     private String address;
     
-    @Column(name="PHONE")
-    private String phone;
-    
     @Column(name="EMAIL")
     private String email;
+    
+    @Column(unique=true, name="PASSWORD")
+    private String password;
     
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "CLIENT_SESSION",joinColumns = @JoinColumn(name = "CLIENT_ID"),inverseJoinColumns = @JoinColumn(name = "SESSION_ID"))
     private List<Session> sessions = new ArrayList<>();
+    
+    public String loginControl(){
+        ClientService cs = new ClientService();
+        if(cs.loginClient(email, password)){
+            HttpSession hs = SessionUtil.getSession();
+            hs.setAttribute("email",email);
+            return "home.xhtml?faces-redirect=true";
+        }else{
+            return "";
+        }
+    }
+
+    public String logoutControl(){
+        HttpSession hs = SessionUtil.getSession();
+        hs.invalidate();
+        return "home.xhtml?faces-redirect=true";
+    }
+    
+    public String registerControl(){
+        ClientService cs = new ClientService();
+        cs.registerClient(this);
+        return "login.xhtml?faces-redirect=true";
+    }
 
     public Integer getId() {
         return id;
@@ -80,12 +107,12 @@ public class Client implements Serializable{
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

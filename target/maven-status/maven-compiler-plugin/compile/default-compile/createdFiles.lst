@@ -9,9 +9,11 @@ fr\utbm\lo54\projet\service\ClientService.class
 fr\utbm\lo54\projet\tools\HibernateUtil.class
 fr\utbm\lo54\projet\repository\EntityClientDao.class
 fr\utbm\lo54\projet\repository\EntityLocationDao.class
+fr\utbm\lo54\projet\tools\SessionUtil.class
 fr\utbm\lo54\projet\entity\Session_.class
 fr\utbm\lo54\projet\repository\EntityCourseDao.class
 fr\utbm\lo54\projet\entity\Client.class
+fr\utbm\lo54\projet\entity\Login.class
 fr\utbm\lo54\projet\entity\Client_.class
 fr\utbm\lo54\projet\service\CourseService.class
 fr\utbm\lo54\projet\entity\Course_.class
