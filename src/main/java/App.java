@@ -4,11 +4,14 @@ import fr.utbm.lo54.projet.tools.HibernateUtil;
 import fr.utbm.lo54.projet.entity.Course;
 import fr.utbm.lo54.projet.entity.Location;
 import fr.utbm.lo54.projet.entity.Session;
+import fr.utbm.lo54.projet.entity.SessionsView;
 import fr.utbm.lo54.projet.service.ClientService;
 import fr.utbm.lo54.projet.service.CourseService;
 import fr.utbm.lo54.projet.service.LocationService;
 import fr.utbm.lo54.projet.service.SessionService;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -67,7 +70,21 @@ public class App {
         testclient.addSession(s);
         cls.updateClient(testclient);*/
         
-        System.out.println(cls.loginClient("remi.papier@utbm.fr","123478"));
+        SessionsView sv = new SessionsView();
+        List<Session> sessions = sv.getSessions();
+        for(int i = 0; i < sessions.size(); i++)
+        {
+            System.out.println(sessions.get(i).getId());
+            System.out.println(sessions.get(i).getCourse());
+            System.out.println(sessions.get(i).getLocation());
+            System.out.println(sessions.get(i).getStartDate());
+            System.out.println(sessions.get(i).getEndDate());
+            System.out.println(sessions.get(i).getCapMax());
+        }
+
+        //List<Session> sessions2 = sv.getSessions();
+        //System.out.println(sessions2);
+        //System.out.println(ss.findSessiontById(1));
 
         HibernateUtil.shutdown();
     }

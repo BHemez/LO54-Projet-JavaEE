@@ -5,9 +5,8 @@
  */
 package fr.utbm.lo54.projet.entity;
 
+import fr.utbm.lo54.projet.service.SessionService;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 
 /**
  *
@@ -25,6 +25,7 @@ import javax.faces.bean.RequestScoped;
 public class Session implements Serializable{
     
     private static final long serialVersionUID = 1L;
+    
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -114,6 +115,7 @@ public class Session implements Serializable{
         clients.add(client);
         client.getSessions().add(this);
     }
+    
 
     @Override
     public int hashCode() {

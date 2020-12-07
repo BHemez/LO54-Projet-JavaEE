@@ -5,11 +5,14 @@
  */
 package fr.utbm.lo54.projet.service;
 
-import fr.utbm.lo54.projet.entity.Client;
 import fr.utbm.lo54.projet.entity.Session;
 import fr.utbm.lo54.projet.repository.EntitySessionDao;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
+import javax.ejb.LocalBean;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 
 /**
  *
@@ -25,6 +28,11 @@ public class SessionService {
     public List<Session> listSession(){
         EntitySessionDao esd = new EntitySessionDao();
         return esd.findAll();
+    }
+    
+    public List<String> listLocation(){
+        EntitySessionDao esd = new EntitySessionDao();
+        return esd.findLocations();
     }
     
     public Session findSessiontById(Integer id) {

@@ -7,8 +7,13 @@ package fr.utbm.lo54.projet.repository;
 
 import fr.utbm.lo54.projet.entity.Client;
 import fr.utbm.lo54.projet.entity.Session;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -36,7 +41,21 @@ public class EntitySessionDao {
     
     public List<Session> findAll() {
         entityManager = entityManagerFactory.createEntityManager();
-        return entityManager.createQuery("from Session").getResultList();
+        return entityManager.createQuery("from Session s", Session.class).getResultList();
+    }
+    
+    public List<String> findLocations(){
+        List<String> lis = new ArrayList<String>();
+        entityManager = entityManagerFactory.createEntityManager();
+        List<Session> s = entityManager.createQuery("from Session s", Session.class).getResultList();
+        for(int i = 0; i < s.size(); i++)
+        {
+            lis.add(s.get(i).getLocation().getCity());
+        }
+        Set<String> uniqueLoc = new HashSet<String>(lis);
+        List<String> finalList = new ArrayList<String>();
+        finalList.addAll(uniqueLoc);
+        return finalList;
     }
     
     public void deleteById(Integer id) {
@@ -56,4 +75,6 @@ public class EntitySessionDao {
         entityManager.merge(s);
         entityManager.getTransaction().commit();
     }
+    
+    
 }
