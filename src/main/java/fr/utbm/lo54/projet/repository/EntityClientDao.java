@@ -51,6 +51,11 @@ public class EntityClientDao {
         return entityManager.find(Client.class, id);
     }
     
+    public Client findByEmail(String email) {
+        entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.createQuery("from Client c WHERE c.email = :email", Client.class).setParameter("email", email).getSingleResult();
+    }
+    
     public List<Client> findAll() {
         entityManager = entityManagerFactory.createEntityManager();
         return entityManager.createQuery("from Client").getResultList();

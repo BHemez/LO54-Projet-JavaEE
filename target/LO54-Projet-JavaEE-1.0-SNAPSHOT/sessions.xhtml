@@ -4,6 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:body>
@@ -11,10 +12,11 @@
         <ui:composition template="./template/mainDisplay.xhtml">
             
             <ui:define name="content">
-                <h:form>
+                <h:form id="form1">
+                    <p:growl id="messageConfirmation" showDetail="true" />
                     <p:dataTable id="dtSessions" var="s" value="#{sview.sessions}"  widgetVar="sessionsTable"
-                                 emptyMessage="No cars found with given criteria" filteredValue="#{sview.filteredSessions}">
-                        
+                                 emptyMessage="No courses found with given criteria" filteredValue="#{sview.filteredSessions}">
+
                         <p:column filterBy="#{s.course.title}" headerText="Course" filterMatchMode="contains">
                             <h:outputText value="#{s.course.title}" />
                         </p:column>
@@ -39,19 +41,26 @@
                             </h:outputText>
                         </p:column>
                         
-                        <p:column headerText="Capacity Max">
-                            <h:outputText value="#{s.capMax}" />
+                        <p:column headerText="Capacity">
+                            <h:outputText value="#{fn:length(s.clients)}/#{s.capMax}" />
                         </p:column>
                         
                         <p:column headerText="Registration">
-                            <p:commandButton value="Register" action="#{sview.registerClient}"/>
+                            <p:commandButton value="Register" action="#{sview.registerClientSession(s.id)}" update=":form1:messageConfirmation">
+                                <p:confirm header="Confirmation" message="Register to #{s.course.title} course in #{s.location.city}?" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
                         </p:column>
                         
                     </p:dataTable>
+                        
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    </p:confirmDialog>  
                 </h:form>
             </ui:define>
-            
+                
         </ui:composition>
-        
+            
     </h:body>
 </html>

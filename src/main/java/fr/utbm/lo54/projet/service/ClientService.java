@@ -29,6 +29,11 @@ public class ClientService {
         EntityClientDao ecd = new EntityClientDao();
         return ecd.findById(id);
     }
+    
+    public Client findClientByEmail(String email) {
+        EntityClientDao ecd = new EntityClientDao();
+        return ecd.findByEmail(email);
+    }
 
     public void deleteClient(Client client) {
         EntityClientDao ecd = new EntityClientDao();

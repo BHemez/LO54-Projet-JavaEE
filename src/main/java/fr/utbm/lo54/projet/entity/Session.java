@@ -116,6 +116,10 @@ public class Session implements Serializable{
         client.getSessions().add(this);
     }
     
+    public int countClients(){
+        List<Client> clients = getClients();
+        return clients.size();
+    }
 
     @Override
     public int hashCode() {

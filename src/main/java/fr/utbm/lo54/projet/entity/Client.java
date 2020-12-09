@@ -54,7 +54,6 @@ public class Client implements Serializable{
     
     public String loginControl(){
         ClientService cs = new ClientService();
-        System.out.println("Login");
         if(cs.loginClient(email, password)){
             HttpSession hs = SessionUtil.getSession();
             hs.setAttribute("email",email);

@@ -5,19 +5,16 @@
  */
 package fr.utbm.lo54.projet.entity;
 
+import fr.utbm.lo54.projet.service.ClientService;
 import fr.utbm.lo54.projet.service.SessionService;
+import fr.utbm.lo54.projet.tools.SessionUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,8 +36,41 @@ public class SessionsView implements Serializable {
         locations = ss.listLocation();
     }
     
-    public void registerClient(){
-        
+    public void registerClientSession(int sessionId){
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession hs = SessionUtil.getSession();
+        String mail = (String)hs.getAttribute("email");
+        if (mail == null) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:","You need to login with an account") );
+        } else {
+            ClientService cs = new ClientService();
+            SessionService ss = new SessionService();
+            try {
+                Session ses = ss.findSessiontById(sessionId);
+                Client cli = cs.findClientByEmail(mail);
+                List<Session> ls = cli.getSessions();
+                boolean exist = sessionExist(sessionId, ls);
+                if(exist==false){
+                    cli.addSession(ses);
+                    cs.updateClient(cli);
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful", "Confirmation message has been sent on "+mail) );
+                } else{
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "You are already registered to this course") );
+                }
+            }
+            catch(Exception e) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", ""+e) );
+            }
+        }
+    }
+    
+    private boolean sessionExist(int sessionId, List<Session> ls){
+        for(int i=0; i<ls.size(); i++){
+            if(ls.get(i).getId()==sessionId){
+                return true;
+            }
+        }
+        return false;
     }
     
     public List<Session> getSessions() {
