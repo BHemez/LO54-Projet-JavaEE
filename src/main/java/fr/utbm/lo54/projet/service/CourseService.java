@@ -8,7 +8,6 @@ package fr.utbm.lo54.projet.service;
 import fr.utbm.lo54.projet.repository.EntityCourseDao;
 import fr.utbm.lo54.projet.entity.Course;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *

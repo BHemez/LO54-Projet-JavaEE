@@ -5,15 +5,11 @@
  */
 package fr.utbm.lo54.projet.repository;
 
-import fr.utbm.lo54.projet.entity.Client;
 import fr.utbm.lo54.projet.entity.Session;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import javax.faces.bean.ApplicationScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

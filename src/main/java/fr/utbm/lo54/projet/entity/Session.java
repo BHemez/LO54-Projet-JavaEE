@@ -5,15 +5,12 @@
  */
 package fr.utbm.lo54.projet.entity;
 
-import fr.utbm.lo54.projet.service.SessionService;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 
 /**

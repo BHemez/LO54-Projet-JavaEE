@@ -69,19 +69,6 @@ public class App {
         Client testclient = cls.findClientById(1);
         testclient.addSession(s);
         cls.updateClient(testclient);*/
-        
-        SessionsView sv = new SessionsView();
-        List<Session> sessions = sv.getSessions();
-        for(int i = 0; i < sessions.size(); i++)
-        {
-            System.out.println(sessions.get(i).getId());
-            System.out.println(sessions.get(i).getCourse());
-            System.out.println(sessions.get(i).getLocation());
-            System.out.println(sessions.get(i).getStartDate());
-            System.out.println(sessions.get(i).getEndDate());
-            System.out.println(sessions.get(i).getCapMax());
-        }
-
         //List<Session> sessions2 = sv.getSessions();
         //System.out.println(sessions2);
         //System.out.println(ss.findSessiontById(1));

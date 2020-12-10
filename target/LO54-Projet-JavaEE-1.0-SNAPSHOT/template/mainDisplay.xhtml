@@ -17,8 +17,7 @@
     <h:body>
 
         <div id="top" class="top">
-            <!--<ui:insert name="top">Top</ui:insert>-->
-            <p:menubar>
+            <p:menubar class="mainMenu">
             <p:menuitem value="Home" url="home.xhtml" icon="pi pi-home" />
             <p:menuitem value="Courses" url="sessions.xhtml"/>
             <f:facet name="options">
@@ -27,7 +26,7 @@
                 <p:commandButton rendered="#{client.email != null}" action="#{client.logoutControl()}" value="Logout" icon="pi pi-user"/>
                 </h:form>
             </f:facet>
-        </p:menubar>    
+            </p:menubar>    
         </div>
 
         <div id="content" class="center_content">
